@@ -21,16 +21,18 @@
 			</el-col>
 		</el-col>
 		<el-col :span="24" class="main">
-			<aside :class="collapsed?'menu-collapsed':'menu-expanded'">
+			<aside>
 				<!--导航菜单-->
-				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
-					 unique-opened router v-show="!collapsed">
+				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect" background-color="#2b2e33"
+						 text-color="#94989d"
+						 active-text-color="#ffffff"
+					 unique-opened router  :collapse="collapsed">
 					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
 						<el-submenu :index="index+''" v-if="!item.leaf">
-							<template slot="title"><i :class="item.iconCls"></i>{{item.name}}</template>
+							<template slot="title"><i :class="item.iconCls"></i><span>{{item.name}}</span></template>
 							<el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">{{child.name}}</el-menu-item>
 						</el-submenu>
-						<el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path"><i :class="item.iconCls"></i>{{item.children[0].name}}</el-menu-item>
+						<el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path"><i :class="item.iconCls"></i><span>{{item.children[0].name}}</span></el-menu-item>
 					</template>
 				</el-menu>
 				<!--导航菜单-折叠后-->
@@ -149,15 +151,16 @@
 		.header {
 			height: 60px;
 			line-height: 60px;
-			background: $color-primary;
-			color:#fff;
+			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+			background-color: #fff;
+
 			.userinfo {
 				text-align: right;
 				padding-right: 35px;
 				float: right;
 				.userinfo-inner {
 					cursor: pointer;
-					color:#fff;
+
 					img {
 						width: 40px;
 						height: 40px;
@@ -167,15 +170,14 @@
 					}
 				}
 			}
+
 			.logo {
-				//width:230px;
+				color: #fff;
 				height:60px;
 				font-size: 22px;
 				padding-left:20px;
 				padding-right:20px;
-				border-color: rgba(238,241,146,0.3);
-				border-right-width: 1px;
-				border-right-style: solid;
+				background: #181a1d;
 				img {
 					width: 40px;
 					float: left;
@@ -186,10 +188,10 @@
 				}
 			}
 			.logo-width{
-				width:230px;
+				width:229px;
 			}
 			.logo-collapse-width{
-				width:60px
+				width:64px
 			}
 			.tools{
 				padding: 0px 23px;
@@ -248,7 +250,10 @@
 				// bottom: 0px;
 				// left: 230px;
 				overflow-y: scroll;
+				border: 10px solid #f2f2f2;
 				padding: 20px;
+				border-right-width:0;
+
 				.breadcrumb-container {
 					//margin-bottom: 15px;
 					.title {
