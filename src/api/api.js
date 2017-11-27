@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//let base = 'http://192.168.2.111:5020/v2/';
 let base = '';
 
 export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };

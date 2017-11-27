@@ -1,0 +1,100 @@
+.fa:before{
+  font-size: 20px;
+  vertical-align: middle;
+}
+body{
+  color: #5B5B5B;
+}
+body,h1,h2,h3,h4,h5,h6,p,table,dl,dd,dt,ul,li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.userSet,.message-dropdown{
+  &.el-popper[x-placement^="bottom"] > div::after{
+    border-bottom-color: #2b2e33;
+  }
+}
+.message-count-badge{
+  sup{
+    top:19px !important;
+    padding: 0 3px;
+  }
+}
+.el-menu--collapse {
+  width: 64px;
+
+}
+
+.el-menu-vertical-nav:not(.el-menu--collapse) {
+  width: 229px;
+}
+.el-menu-vertical-nav{
+  font-size: 13px;
+  .el-menu-item{
+    height: 35px;
+    line-height: 35px;
+    color: #94989d;
+    i:before{
+      font-size: 14px;
+    }
+
+  }
+    .el-submenu__title {
+      height: 35px;
+      line-height: 35px;
+      color: #94989d;
+      i:before{
+        font-size: 14px;
+      }
+      &:hover{
+        background-color: transparent;
+      }
+    }
+  .el-submenu{
+    .el-menu {
+      background-color: #181a1d !important;
+      &:after{
+        border-left: 1px solid #2b2e33;
+        bottom: 0;
+        content: "";
+        left: 27px;
+        position: absolute;
+        top: 0;
+        display: inline-block;
+      }
+      li{
+        height: 35px;
+        line-height: 35px;
+        background-color: transparent !important;
+        padding-left: 50px !important;
+        &:before {
+          background: #2b2e33;
+          bottom: auto;
+          content: "";
+          height: 8px;
+          left: 23px;
+          margin-top: 15px;
+          position: absolute;
+          right: auto;
+          width: 8px;
+          z-index: 1;
+          border-radius: 50%;
+          display: inline-block;
+        }
+      }
+    }
+
+  }
+  .is-active{
+      .el-submenu__title,&.el-menu-item{
+        background-color: #319db5 !important;
+        color: #ffffff !important;
+        i{
+          color: #ffffff !important;
+        }
+      }
+    }
+
+}
+
