@@ -135,7 +135,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'VUEADMIN',
+				sysName:'DEMOADMIN',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',

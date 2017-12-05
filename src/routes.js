@@ -11,6 +11,9 @@ import echarts from './views/charts/echarts.vue'
 import Tree from './views/nav2/tree.vue'
 import Dialog from './views/nav2/dialog.vue'
 import Message from './views/nav2/message.vue'
+
+import Device from './views/Device.vue'
+import Employees from  './views/Employees.vue'
 let routes = [
     {
         path: '/login',
@@ -28,26 +31,22 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '导航一',
+        name: '',
+        leaf: true,//只有一个节点
         iconCls: 'fa fa-home',//图标样式class
         children: [
-            { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/form', component: Form, name: 'Form' },
-            { path: '/user', component: user, name: '列表' },
+            { path: '/main', component: Device, name: '终端设备管理' },
+
         ]
     },
     {
         path: '/',
         component: Home,
-        name: '导航二',
+        name: '',
         iconCls: 'fa fa-table',
+        leaf: true,//只有一个节点
         children: [
-            { path: '/page4', component: Page4, name: '按钮' },
-            { path: '/page5', component: Page5, name: 'tabs' },
-            { path: '/tree', component: Tree, name: 'tree' },
-            { path: '/dialog', component: Dialog, name: 'Dialog对话框' },
-            { path: '/message', component: Message, name: 'message消息提示' },
-
+            { path: '/employees', component: Employees, name: '员工管理' },
 
         ]
     },
@@ -58,16 +57,37 @@ let routes = [
         iconCls: 'fa fa-user',
         leaf: true,//只有一个节点
         children: [
-            { path: '/page6', component: Page6, name: '导航三' }
+            { path: '/page6', component: Page6, name: '账户管理' }
         ]
     },
     {
         path: '/',
         component: Home,
-        name: 'Charts',
+        name: '',
         iconCls: 'fa fa-bar-chart',
+        leaf: true,//只有一个节点
         children: [
-            { path: '/echarts', component: echarts, name: 'echarts' }
+            { path: '/echarts', component: echarts, name: '访问管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-bar-chart',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/tabs', component: Page5, name: '预约访问' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-bar-chart',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/tree', component: Tree, name: '我的访问' }
         ]
     },
     {
