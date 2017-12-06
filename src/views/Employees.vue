@@ -3,6 +3,39 @@
         <el-button-group>
             <el-button  size="mini" plain icon="el-icon-refresh" @click="refresh()">刷新</el-button>
             <el-button  size="mini" plain icon="el-icon-circle-plus-outline" @click="addDevice()">新增员工</el-button>
+            <el-button  size="mini" plain icon="el-icon-edit-outline" class="lastBtn">
+                <el-select v-model="visited" placeholder="请选择" size="mini"  @change="changeVisited(visited)">
+                    <el-option
+                            v-for="item in visited_options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"
+                    >
+                    </el-option>
+                </el-select>
+            </el-button>
+            <el-button  size="mini" plain icon="el-icon-edit-outline" class="lastBtn">
+                <el-select v-model="audit" placeholder="请选择" size="mini"  @change="changeAudit(audit)">
+                    <el-option
+                            v-for="item in audit_options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"
+                    >
+                    </el-option>
+                </el-select>
+            </el-button>
+            <el-button  size="mini" plain icon="el-icon-edit-outline" class="lastBtn">
+                <el-select v-model="state" placeholder="请选择" size="mini"  @change="changeState(state)">
+                    <el-option
+                            v-for="item in state_options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"
+                    >
+                    </el-option>
+                </el-select>
+            </el-button>
         </el-button-group>
         <el-input
                 placeholder="请输入员工工号"
@@ -138,51 +171,57 @@
         </el-pagination>
 
 
-        <el-dialog title="添加员工" :visible.sync="dialogFormVisible">
-            <el-form :model="form" :rules="rules" ref="ruleForm" label-position="left" >
-                <el-form-item label="工号" :label-width="formLabelWidth" prop="ip">
-                    <el-input v-model="form.id" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="姓名" :label-width="formLabelWidth" prop="name" >
-                    <el-input v-model="form.name" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="身份证号" :label-width="formLabelWidth" prop="idCard">
-                    <el-input v-model="form.idCard" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="手机号码" :label-width="formLabelWidth" prop="phone">
-                    <el-input v-model="form.phone" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
-                    <el-input v-model="form.email" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="性别" :label-width="formLabelWidth" prop="sex">
-                    <el-radio-group v-model="form.sex">
-                        <el-radio label="男"></el-radio>
-                        <el-radio label="女"></el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="出生日期" :label-width="formLabelWidth" prop="date">
-                    <el-date-picker
-                            v-model="form.date"
-                            type="datetime"
-                            placeholder="选择日期"
-                            align="right"
-                            value-format="yyyy-MM-dd"
-                    >
-                    </el-date-picker>
-                </el-form-item>
-                <el-form-item label="允许被访" :label-width="formLabelWidth" prop="visited">
-                    <el-switch v-model="form.visited"></el-switch>
-                </el-form-item>
-                <el-form-item label="是否需要审核" :label-width="formLabelWidth" prop="audit">
-                    <el-switch v-model="form.audit" auto-complete="off"></el-switch>
-                </el-form-item>
-                <el-form-item label="在职状态" :label-width="formLabelWidth" prop="online">
-                    <el-switch v-model="form.online" auto-complete="off"></el-switch>
-                </el-form-item>
-                <el-form-item label="备注" :label-width="formLabelWidth">
-                    <el-input v-model="form.remark" auto-complete="off"></el-input>
-                </el-form-item>
+        <el-dialog :title="title+'员工'" :visible.sync="dialogFormVisible">
+            <el-form :model="form" :rules="rules" ref="ruleForm" >
+
+                <el-tabs v-model="active" @tab-click="handleClick" >
+                    <el-tab-pane label="基本信息" name="first">
+                        <el-form-item label="工号" :label-width="formLabelWidth" prop="id">
+                        <el-input v-model="form.id" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="姓名" :label-width="formLabelWidth" prop="name" >
+                            <el-input v-model="form.name" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="身份证号" :label-width="formLabelWidth" prop="idCard">
+                            <el-input v-model="form.idCard" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="手机号码" :label-width="formLabelWidth" prop="phone">
+                            <el-input v-model="form.phone" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
+                            <el-input v-model="form.email" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="性别" :label-width="formLabelWidth" prop="sex">
+                            <el-radio-group v-model="form.sex">
+                                <el-radio label="男"></el-radio>
+                                <el-radio label="女"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="出生日期" :label-width="formLabelWidth" prop="date">
+                            <el-date-picker
+                                    v-model="form.date"
+                                    type="date"
+                                    placeholder="选择日期"
+                                    align="right"
+                            >
+                            </el-date-picker>
+                        </el-form-item></el-tab-pane>
+                    <el-tab-pane label="更多信息" name="second">
+                        <el-form-item label="允许被访" :label-width="formLabelWidth" prop="visited">
+                        <el-switch v-model="form.visited"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="是否需要审核" :label-width="formLabelWidth" prop="audit">
+                            <el-switch v-model="form.audit" auto-complete="off"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="在职状态" :label-width="formLabelWidth" prop="online">
+                            <el-switch v-model="form.online" auto-complete="off"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="备注" :label-width="formLabelWidth">
+                            <el-input v-model="form.remark" auto-complete="off"></el-input>
+                        </el-form-item>
+                    </el-tab-pane>
+
+                </el-tabs>
 
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -195,12 +234,13 @@
 </template>
 <style  lang="scss">
     .lastBtn{
-        padding:0px 0 0px 15px;
+        padding:0px 0 0px 0px;
         .el-input.el-input--mini{
-            width:110px;
+            width:100px;
             input{
                 border-width:0;
                 height:26px;
+                padding:0;
             }
         }
 
@@ -224,14 +264,31 @@
     export default {
         data() {
             return {
-                options: [{
+                title:'添加',
+                state_options: [{
                     value: '1',
-                    label: '启用'
+                    label: '在职'
                 }, {
                     value: '0',
-                    label: '禁用'
+                    label: '离职'
                 }],
-                state: '状态操作',//状态
+                visited_options: [{
+                    value: '1',
+                    label: '允许'
+                }, {
+                    value: '0',
+                    label: '不允许'
+                }],
+                audit_options: [{
+                    value: '1',
+                    label: '需要审核'
+                }, {
+                    value: '0',
+                    label: '不需要审核'
+                }],
+                visited:'允许被访操作',
+                audit:'审核操作',
+                state: '在职状态操作',//状态
                 searchValue: '',//搜索值
                 tableData: [{
                     id: 1,
@@ -290,10 +347,10 @@
                     visited:false,
                     audit:false
                 },
+                active:'first',
                 rules: {
-//                    name: { required: true, message: '请输入设备名称', trigger: 'blur' },
-//                    ip: { required: true, message: '请输入设备IP', trigger: 'blur' },
-//                    address:  { required: true, message: '请输入地址', trigger: 'blur' },
+                    id: { required: true, message: '请输入工号', trigger: 'blur' },
+                    name: { required: true, message: '请输入姓名', trigger: 'blur' },
                 },
                 formLabelWidth: '100px',
                 activeType:'add',
@@ -310,6 +367,7 @@
                 this.form = {};
                 this.dialogFormVisible = true;
                 this.activeType = 'add';
+                this.title = '添加';
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
@@ -339,7 +397,7 @@
                 this.CurrentIndex = index;
                 this.activeType = 'edit';
                // row.address = NameToCode(row.address);
-
+                this.title = '编辑';
                 this.form = row;
             },
             //删除
@@ -363,6 +421,9 @@
                 row.visible =false;
 
             },
+            handleClick(){
+
+            },
             //搜索
             search(value){
                 console.log(value)
@@ -370,7 +431,13 @@
             //改变状态
             changeState(value){
                 console.log(value,this.multipleSelection)
-            }
+            },
+            changeVisited(value){
+                console.log(value,this.multipleSelection)
+            },
+             changeAudit(value){
+                 console.log(value,this.multipleSelection)
+             }
         }
     }
 </script>

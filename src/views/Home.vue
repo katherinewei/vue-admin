@@ -384,6 +384,11 @@
 				flex:0 0 230px;
 				width: 230px;
 			}
+			.bg-purple-light .breadcrumb-container{
+				border-bottom: 1px solid #e8eef4;
+				overflow: hidden;
+				padding-bottom: 10px;
+			}
 			.content-container {
 				// background: #f1f2f7;
 				flex:1;

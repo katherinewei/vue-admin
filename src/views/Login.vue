@@ -62,7 +62,7 @@
                 });
               } else {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/form' });
+                this.$router.push({ path: '/device' });
               }
             });
           } else {
@@ -79,9 +79,7 @@
 <style lang="scss" scoped>
   .login-container {
     /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-    -webkit-border-radius: 5px;
     border-radius: 5px;
-    -moz-border-radius: 5px;
     background-clip: padding-box;
     margin: 180px auto;
     width: 350px;
@@ -90,12 +88,12 @@
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
     .title {
-      margin: 0px auto 40px auto;
+      margin: 0 auto 40px auto;
       text-align: center;
       color: #505458;
     }
     .remember {
-      margin: 0px 0px 35px 0px;
+      margin: 0 0 35px 0;
     }
   }
 </style>

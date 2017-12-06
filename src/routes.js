@@ -14,6 +14,10 @@ import Message from './views/nav2/message.vue'
 
 import Device from './views/Device.vue'
 import Employees from  './views/Employees.vue'
+import User from  './views/User.vue'
+import Visit from './views/Visit.vue'
+import MyVisit from './views/MyVisit.vue'
+import AppointVisit from './views/AppointVisit.vue'
 let routes = [
     {
         path: '/login',
@@ -33,7 +37,7 @@ let routes = [
         component: Home,
         name: '',
         leaf: true,//只有一个节点
-        iconCls: 'fa fa-home',//图标样式class
+        iconCls: 'fa fa-plug',//图标样式class
         children: [
             { path: '/main', component: Device, name: '终端设备管理' },
 
@@ -43,7 +47,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-table',
+        iconCls: 'fa fa-user-circle',
         leaf: true,//只有一个节点
         children: [
             { path: '/employees', component: Employees, name: '员工管理' },
@@ -54,40 +58,40 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-user',
+        iconCls: 'fa fa-users',
         leaf: true,//只有一个节点
         children: [
-            { path: '/page6', component: Page6, name: '账户管理' }
+            { path: '/user', component: User, name: '账户管理' }
         ]
     },
     {
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-bar-chart',
+        iconCls: 'fa fa-ravelry',
         leaf: true,//只有一个节点
         children: [
-            { path: '/echarts', component: echarts, name: '访问管理' }
+            { path: '/visit', component: Visit, name: '访问管理' }
         ]
     },
     {
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-bar-chart',
+        iconCls: 'fa fa-server',
         leaf: true,//只有一个节点
         children: [
-            { path: '/tabs', component: Page5, name: '预约访问' }
+            { path: '/appointVisit', component: AppointVisit, name: '预约访问' }
         ]
     },
     {
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-bar-chart',
+        iconCls: 'fa fa-id-badge',
         leaf: true,//只有一个节点
         children: [
-            { path: '/tree', component: Tree, name: '我的访问' }
+            { path: '/myVisit', component: MyVisit, name: '我的访问' }
         ]
     },
     {
