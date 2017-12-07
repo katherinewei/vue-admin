@@ -390,18 +390,11 @@
 				padding-bottom: 10px;
 			}
 			.content-container {
-				// background: #f1f2f7;
 				flex:1;
-				// position: absolute;
-				// right: 0px;
-				// top: 0px;
-				// bottom: 0px;
-				// left: 230px;
 				overflow-y: scroll;
 				border: 10px solid #f2f2f2;
 				padding: 20px;
 				border-right-width:0;
-
 				.breadcrumb-container {
 					//margin-bottom: 15px;
 					.title {
