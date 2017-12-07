@@ -83,7 +83,7 @@
 </el-form>
 </template>
 <script>
-	import Address from '../../api/address'
+	import Address from '../../modules/address'
     import provinces from 'china-division/dist/provinces.json';
     import cities from 'china-division/dist/cities.json';
     import areas from 'china-division/dist/areas.json';
